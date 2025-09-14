@@ -5,6 +5,7 @@ import net.tufinder.backend.dto.UserDto;
 import net.tufinder.backend.dto.UserDto.UserCreateDto;
 import net.tufinder.backend.entity.Users;
 import net.tufinder.backend.repository.UserRepo;
+import net.tufinder.backend.service.CaptchaService;
 import net.tufinder.backend.service.JwtService;
 import net.tufinder.backend.util.PasswordHasher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class UserController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private CaptchaService captchaService;
 
     @GetMapping()
     public ResponseEntity<List<Users>> allUsers(){
@@ -38,6 +41,10 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<Users> createUser(@RequestBody UserCreateDto dto){
+        if(!captchaService.verifyToken(dto.getToken())){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
         Optional<Users> optUser = userRepo.findByEmail(dto.getEmail());
         if(optUser.isPresent()){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
