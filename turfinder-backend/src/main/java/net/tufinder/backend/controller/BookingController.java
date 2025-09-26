@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,9 @@ public class BookingController {
         if(opt.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         Turf turf = opt.get();
 
-        List<BookingDto.RetrieveDto> list = turf.getBookingList().stream().map(BookingDto::map).toList();
+        List<BookingDto.RetrieveDto> list = turf.getBookingList().stream().filter(
+                (b)->b.getDate().isAfter(LocalDate.now()) && b.getDate().isBefore(LocalDate.now().plusDays(7))
+        ).map(BookingDto::map).toList();
         return ResponseEntity.ok(list);
     }
 
