@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.tufinder.backend.entity.Pricing;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PricingDto {
+public class PricingDto implements Serializable {
     private Double pricePerHour;
     private LocalTime startHour;
     private LocalTime endHour;

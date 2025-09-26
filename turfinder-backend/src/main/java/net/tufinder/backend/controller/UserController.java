@@ -83,7 +83,7 @@ public class UserController {
 
         Users user = optUser.get();
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getName(),dto.getPassword())
+                new UsernamePasswordAuthenticationToken(dto.getEmail(),dto.getPassword())
         );
         if(authentication.isAuthenticated()){
             return ResponseEntity.ok(
@@ -91,7 +91,7 @@ public class UserController {
                             user.getId(),
                             user.getName(),
                             user.getEmail(),
-                            jwtService.generateToken(user.getName())
+                            jwtService.generateToken(user.getEmail())
                     )
             );
         }else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);

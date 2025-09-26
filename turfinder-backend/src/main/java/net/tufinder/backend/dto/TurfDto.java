@@ -8,6 +8,7 @@ import net.tufinder.backend.entity.Pricing;
 import net.tufinder.backend.entity.Turf;
 import net.tufinder.backend.entity.TurfPictures;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +22,7 @@ public class TurfDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class RetrieveDto{
+    public static class RetrieveDto implements Serializable {
         private Long id;
         private String name;
         private LocationDto location;

@@ -6,11 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.tufinder.backend.entity.Location;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LocationDto {
+public class LocationDto implements Serializable {
         private String address;
         private Double longitude;
         private Double latitude;
