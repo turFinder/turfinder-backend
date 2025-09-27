@@ -51,8 +51,8 @@ public class ReviewController {
         reviewRepo.save(review);
 
         Turf turf = optTurf.get();
-        Integer prevSize = turf.getReviewList().size();
-        Double newAvgRating = (turf.getAverageRating()*prevSize + dto.getRating())/(prevSize+1);
+        int size = turf.getReviewList().size();
+        Double newAvgRating = (turf.getAverageRating()*(size-1) + dto.getRating())/(size);
         turf.setAverageRating(newAvgRating);
         turfRepo.save(turf);
 
