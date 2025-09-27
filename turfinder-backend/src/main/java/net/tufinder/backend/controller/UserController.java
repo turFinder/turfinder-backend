@@ -108,7 +108,7 @@ public class UserController {
                             user.getId(),
                             user.getName(),
                             user.getEmail(),
-                            jwtService.generateToken(user.getName())
+                            jwtService.generateToken(user.getEmail())
                     )
             );
         }
@@ -125,7 +125,7 @@ public class UserController {
                         user.getId(),
                         user.getName(),
                         user.getEmail(),
-                        jwtService.generateToken(user.getName())
+                        jwtService.generateToken(user.getEmail())
                 )
         );
     }
