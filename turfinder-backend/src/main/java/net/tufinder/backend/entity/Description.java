@@ -20,4 +20,9 @@ public class Description {
     private Long id;
     private String text;
     private LocalDateTime created_at;
+
+    @PrePersist
+    void init(){
+        created_at = LocalDateTime.now();
+    }
 }

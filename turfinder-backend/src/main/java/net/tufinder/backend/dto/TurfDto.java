@@ -42,7 +42,9 @@ public class TurfDto {
                 .map(TurfPictures::getTurfImageUrl)
                 .collect(Collectors.toList()));
 
-        dto.setAverageRating(turf.getAverageRating());
+        double avg = turf.getAverageRating();
+        double rounded = Math.round(avg * 100.0) / 100.0; // round to 2 decimals
+        dto.setAverageRating(rounded);
         dto.setLocation(LocationDto.map(turf.getLocation()));
         dto.setDescription(turf.getDescription().getText());
         dto.setSlotDuration(turf.getSlotDuration());

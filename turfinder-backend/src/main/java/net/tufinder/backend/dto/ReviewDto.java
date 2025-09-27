@@ -14,6 +14,17 @@ public class ReviewDto {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class CreateDto{
+        private String text;
+        private Double rating;
+        private Long user_id;
+        private Long turf_id;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class RetrieveDto{
         private Long id;
         private Double rating;
